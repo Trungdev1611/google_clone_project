@@ -1,0 +1,1 @@
+Lưu ý sự khác biệt giữa đường dẫn tương đối và đường dẫn tuyệt đối trong react router. sự khác biệt đó là ở /. Nếu đang ở http://localhost3000/search thì khi router sang /test thì sẽ là localhost3000/test còn nếu khi router sang test thì sẽ là localhost3000/search/test

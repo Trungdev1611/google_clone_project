@@ -10,17 +10,18 @@ const ContextResult = (props) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [searchInput, setSearchInput] = useState("")
+    const [currentPage, setCurrentPage] = useState(1)
     const url = "https://google-search3.p.rapidapi.com/api/v1"
 
     const location = useLocation() // info url
+    let amountOfdata = 100
 
     useEffect(() => {
         if (searchInput.trim()) setLoading(true) // neu input co value va duoc submit thi loading 
         function fetchData(content, keyword) {
-
             let linkAPi = `${url}${keyword}/q=${content}`
             console.log(linkAPi)
-            fetch(`${url}${keyword}/q=${content}`, {
+            fetch(`${url}${keyword}/q=${content}&&num=${amountOfdata}`, {
 
                 method: 'GET',
                 headers: {
@@ -61,7 +62,7 @@ const ContextResult = (props) => {
     }, [location.pathname, searchInput])
 
     return (
-        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput }}>
+        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata }}>
             {props.children}
         </ContextggSearch.Provider>
     )

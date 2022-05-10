@@ -41,14 +41,14 @@ const ContextResult = (props) => {
             // clear Timeout increase perfomance
             //void(0) la de so sanh undefined
             //timeout khoi tao tai useRef neu khac undefined thi cleare
-            if (timeout !== void (0)) clearTimeout(timeout)
+            if (timeout.current !== void (0)) clearTimeout(timeout.current)
 
         }
         if (["/search", "/image", "/video", "/news"].includes(location.pathname)) {
 
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
-                timeout = setTimeout(function () {
+                timeout.current = setTimeout(function () {
                     fetchData(searchInput, location.pathname)
                     console.log('re-render 2s')
 
@@ -59,7 +59,7 @@ const ContextResult = (props) => {
 
 
 
-    }, [location.pathname, searchInput])
+    }, [location.pathname, searchInput, amountOfdata])
 
     return (
         <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata }}>

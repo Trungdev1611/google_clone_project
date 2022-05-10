@@ -3,6 +3,7 @@ import { useResultContext } from '../Context/ContextResult'
 import { useLocation } from 'react-router-dom'
 import Pagination from './Pagination'
 import Loading from './Loading'
+import '../scss/ResultSearch.scss'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
@@ -24,11 +25,12 @@ const Result = () => {
     switch (location.pathname) {
         case '/search':
             var { results } = data.data
-            return <div>
-                {Array.isArray(results) ? results.slice(indexOfFirstPage, indexOfLastPage).map(({ title, link }, index) => {
-                    return <div className='search-result' key={index}>
-                        <div><a href="{link}">{link}</a></div>
-                        <div>{title}</div>
+            return <div className='search-result'>
+                {Array.isArray(results) ? results.slice(indexOfFirstPage, indexOfLastPage).map(({ title, link, description }, index) => {
+                    return <div className='search-result-item' key={index}>
+                        <div className='search-result__link'>{link.substr(0, 50)}</div>
+                        <div className='search-result__title'><a href="{link}" className='search-result__link'>{title}</a></div>
+                        <div className='search-result__desc'>{description}</div>
 
                     </div>
 

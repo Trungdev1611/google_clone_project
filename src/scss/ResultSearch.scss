@@ -1,0 +1,21 @@
+.search-result {
+    margin: 3rem 0;
+    color: red;
+}
+.search-result-item{
+    margin: 3rem 0;
+    font-size: 16px;
+    width: 60%;
+    margin: 0 auto;
+    // & .search-result__link {
+    // }
+    & .search-result__title {
+        font-size: 2rem;
+        padding: 5px 0;
+
+    }
+    & .search-result__desc {
+        font-size: 1.4rem;
+
+    }
+}

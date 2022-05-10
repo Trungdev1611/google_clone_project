@@ -10,8 +10,12 @@
     margin-top: 9rem;
     font-size: 14px;
     color: #3c4043;
+    @include tablet-maxwidth {
+    margin-top: 12rem;
+    }
     & .logo {
       margin-bottom: 30px;
+   
       & img {
         @include tablet-maxwidth {
           width: 80%;
@@ -92,11 +96,7 @@
       right: 20px;
       left: auto;
     }
-    @include mobile-maxwidth {
-      right: 20px;
-      left: auto;
 
-    }
   }
 
   .search-input input {
@@ -106,6 +106,10 @@
     outline: none;
     width: 100%;
     padding-left: 40px;
+    @include tablet-maxwidth {
+  padding-left: 10px;
+
+    }
   }
   .search-input input:hover {
     box-shadow: 0 0 2px #aaa;

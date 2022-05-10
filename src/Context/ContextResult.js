@@ -1,16 +1,18 @@
 import React from 'react'
 import { createContext } from 'react'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export const ContextggSearch = createContext()
 
 const ContextResult = (props) => {
-    let timeout = useRef()
+    // let timeout = useRef()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [searchInput, setSearchInput] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
+    const [inputHome, setInputHome] = useState("")
+
     const url = "https://google-search3.p.rapidapi.com/api/v1"
 
     const location = useLocation() // info url
@@ -41,18 +43,18 @@ const ContextResult = (props) => {
             // clear Timeout increase perfomance
             //void(0) la de so sanh undefined
             //timeout khoi tao tai useRef neu khac undefined thi cleare
-            if (timeout.current !== void (0)) clearTimeout(timeout.current)
+            // if (timeout.current !== void (0)) clearTimeout(timeout.current)
 
         }
         if (["/search", "/image", "/video", "/news"].includes(location.pathname)) {
 
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
-                timeout.current = setTimeout(function () {
-                    fetchData(searchInput, location.pathname)
-                    console.log('re-render 2s')
+                // timeout.current = setTimeout(function () {
+                fetchData(searchInput, location.pathname)
+                // console.log('re-render 2s')
 
-                }, 2000)
+                // }, 1000)
             }
 
         }
@@ -62,7 +64,7 @@ const ContextResult = (props) => {
     }, [location.pathname, searchInput, amountOfdata])
 
     return (
-        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata }}>
+        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata, inputHome, setInputHome }}>
             {props.children}
         </ContextggSearch.Provider>
     )

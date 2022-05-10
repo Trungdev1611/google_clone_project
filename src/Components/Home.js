@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useResultContext } from '../Context/ContextResult';
 import { useNavigate } from 'react-router-dom';
-import { GoSearch } from 'react-icons/go';
+// import { GoSearch } from 'react-icons/go';
 import "../scss/Home.scss";
+import InputSearch from './InputSearch';
 const Home = () => {
-    const [inputHome, setInputHome] = useState("")
-    let { setSearchInput } = useResultContext()
+    let { setSearchInput, inputHome } = useResultContext()
     const navigate = useNavigate()
     function handleSearch() {
         if (inputHome.trim())
@@ -24,16 +24,22 @@ const Home = () => {
                     <img src="https://www.google.com.vn/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="logo" />
                 </div>
                 <div className="search">
-                    <div className="search-input">
-                        <GoSearch className='iconsearch' />
-                        <input type="text" value={inputHome} onChange={(e) => setInputHome(e.target.value)} />
-                    </div>
+                    {/* <div className="search-input">
+                        <GoSearch className='iconsearch'
+                            onClick={handleSearch}
+                        />
+                        <input type="text" value={inputHome}
+                            onChange={(e) => setInputHome(e.target.value)}
+                            onKeyPress={(e) => { if (e.key === 'Enter') { handleSearch() } }}
+                        />
+                    </div> */}
+                    <InputSearch />
 
                     <div className="buttons">
                         <button className='btn btn-search' onClick={handleSearch}>Tìm trên Google</button>
-                        <button className='btn btn-search'>Xem trang đầu tiên tìm được</button>
+                        <button className='btn btn-search' onClick={handleSearch}>Xem trang đầu tiên tìm được</button>
                     </div>
-                    <p>Google có các thứ tiếng: English Français 繁體中文</p>
+                    <p>Google có các thứ tiếng: <a href="/#">English Français 繁體中文</a></p>
                 </div>
             </div>
 

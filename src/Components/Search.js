@@ -1,28 +1,54 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useResultContext } from '../Context/ContextResult'
-import InputSearch from './InputSearch'
-const Search = () => {
+import { GoSearch } from 'react-icons/go';
 
-    let { searchInput, setSearchInput, inputHome } = useResultContext()
+import "../scss/Search.scss"
+const Search = () => {
+    let router = [
+        { to: "/search", value: "Tất cả" },
+        { to: "/news", value: "Tin tức" },
+        { to: "/image", value: "Hình ảnh" },
+        { to: "/add", value: "Thêm" }]
+    let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
     console.log('searchinput', searchInput)
     return (
         <div>
-            {/* <input type="text" value={inputHome} onChange={(e) => setInputHome(e.target.value)} /> */}
-            <div className='search-result'>
-                <div className="logo">
-                    <img src="https://www.google.com.vn/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="logo" />
+            <div className="search-header">
+                <div className='search-header__logo'>
+                    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="logo google" />
                 </div>
-                <InputSearch style1={"50%"} />
-                <div className="signup-btn"><button>Đăng nhập</button></div>
+                <div className="search-header__input">
+                    <div className='iconsearch' onClick={handleSearch}>
+                        <GoSearch className='iconsearch-item'
+
+                        />
+                    </div>
+                    {inputHome ? <div className="search-input-close"
+                        onClick={() => setInputHome("")}
+                    >X</div> : ''}
+
+                    <input type="text" value={inputHome}
+                        onChange={(e) => setInputHome(e.target.value)}
+                        onKeyPress={(e) => { if (e.key === 'Enter') { handleSearch() } }}
+                    />
+                </div>
+                <div className="search-header__button">
+                    <button type="button" >Đăng nhập</button>
+
+                </div>
             </div>
 
-            <button type="button" onClick={() => setSearchInput(inputHome)}>SendData</button>
+
             <div className='router-link'>
-                <NavLink to="/search" >All</NavLink>
-                <NavLink to="/news">News</NavLink>
-                <NavLink to="/image">Image</NavLink>
-                <NavLink to="/video">Video</NavLink>
+                {router.map(({ to, value }, index) => {
+                    return (<div key={index}>
+                        <NavLink to={to}
+                            style={({ isActive }) => ({ color: isActive ? "#79a4f0" : "#3c4043" })}
+                        >{value}</NavLink>
+                    </div>)
+                })}
+
             </div>
 
         </div>

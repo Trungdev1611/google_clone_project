@@ -1,22 +1,10 @@
 import React from 'react';
 import { useResultContext } from '../Context/ContextResult';
-import { useNavigate } from 'react-router-dom';
-// import { GoSearch } from 'react-icons/go';
 import "../scss/Home.scss";
 import InputSearch from './InputSearch';
-const Home = () => {
-    let { setSearchInput, inputHome } = useResultContext()
-    const navigate = useNavigate()
-    function handleSearch() {
-        if (inputHome.trim())
-            setSearchInput(inputHome)
-        //chuyen huong trang nguoi dung su dung hooks usenavigate
-        navigate("/search"
-            // , { replace: true }
-        )
-        // replace true will not save info page history in browser so we can't back page history
 
-    }
+const Home = () => {
+    let { handleSearch } = useResultContext()
     return (
         <div>
             <div className="body-home">
@@ -24,15 +12,7 @@ const Home = () => {
                     <img src="https://www.google.com.vn/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="logo" />
                 </div>
                 <div className="search">
-                    {/* <div className="search-input">
-                        <GoSearch className='iconsearch'
-                            onClick={handleSearch}
-                        />
-                        <input type="text" value={inputHome}
-                            onChange={(e) => setInputHome(e.target.value)}
-                            onKeyPress={(e) => { if (e.key === 'Enter') { handleSearch() } }}
-                        />
-                    </div> */}
+
                     <InputSearch />
 
                     <div className="buttons">
@@ -64,11 +44,3 @@ const Home = () => {
 export default Home
 
 
-
-
-// const history = useNavigate();
-
-// function handleSubmit(e) {
-//     e.preventDefault();
-
-// history('/home');

@@ -1,12 +1,14 @@
 import React from 'react'
 import { createContext } from 'react'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export const ContextggSearch = createContext()
 
 const ContextResult = (props) => {
-    // let timeout = useRef()
+    const navigate = useNavigate()
+    let timeout = useRef()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [searchInput, setSearchInput] = useState("")
@@ -17,7 +19,16 @@ const ContextResult = (props) => {
 
     const location = useLocation() // info url
     let amountOfdata = 100
+    function handleSearch() {
+        if (inputHome.trim())
+            setSearchInput(inputHome)
+        //chuyen huong trang nguoi dung su dung hooks usenavigate
+        navigate("/search"
+            // , { replace: true }
+        )
+        // replace true will not save info page history in browser so we can't back page history
 
+    }
     useEffect(() => {
         if (searchInput.trim()) setLoading(true) // neu input co value va duoc submit thi loading 
         function fetchData(content, keyword) {
@@ -43,18 +54,18 @@ const ContextResult = (props) => {
             // clear Timeout increase perfomance
             //void(0) la de so sanh undefined
             //timeout khoi tao tai useRef neu khac undefined thi cleare
-            // if (timeout.current !== void (0)) clearTimeout(timeout.current)
+            if (timeout.current !== void (0)) clearTimeout(timeout.current)
 
         }
         if (["/search", "/image", "/video", "/news"].includes(location.pathname)) {
 
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
-                // timeout.current = setTimeout(function () {
-                fetchData(searchInput, location.pathname)
-                // console.log('re-render 2s')
+                timeout.current = setTimeout(function () {
+                    fetchData(searchInput, location.pathname)
+                    console.log('re-render 200ms')
 
-                // }, 1000)
+                }, 200)
             }
 
         }
@@ -64,7 +75,7 @@ const ContextResult = (props) => {
     }, [location.pathname, searchInput, amountOfdata])
 
     return (
-        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata, inputHome, setInputHome }}>
+        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata, inputHome, setInputHome, handleSearch }}>
             {props.children}
         </ContextggSearch.Provider>
     )

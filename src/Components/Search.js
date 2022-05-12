@@ -9,6 +9,7 @@ const Search = () => {
         { to: "/search", value: "Tất cả" },
         { to: "/news", value: "Tin tức" },
         { to: "/image", value: "Hình ảnh" },
+        { to: "/video", value: "Video" },
         { to: "/add", value: "Thêm" }]
     let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
     console.log('searchinput', searchInput)

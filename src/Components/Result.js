@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import Pagination from './Pagination'
 import Loading from './Loading'
 import '../scss/ResultSearch.scss'
+import '../scss/ResultNews.scss'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
@@ -63,17 +64,17 @@ const Result = () => {
 
             return <div className='news-result'>
                 {Array.isArray(entries) ?
-                    entries.map(({ link, title }, index) => {
-                        return <div className='image-result-item' key={index}>
-                            <div><a href={link}>{title}</a></div>
-                            <div className="desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, molestiae explicabo repellendus ipsa ut nulla voluptas accusantium magni omnis natus!</div>
+                    entries.slice(indexOfFirstPage, indexOfLastPage).map(({ link, title }, index) => {
+                        return <div className='news-result-item' key={index}>
+                            <div className='news-result-item__title'><a href={link}>{title}</a></div>
+                            <div className="news-result-item__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, molestiae explicabo repellendus ipsa ut nulla voluptas accusantium magni omnis natus!</div>
 
 
                         </div>
                     })
 
                     : ""}
-
+                {Array.isArray(entries) ? <Pagination /> : ""}
             </div>
 
         case '/video':

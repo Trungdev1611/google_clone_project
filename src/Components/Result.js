@@ -5,6 +5,7 @@ import Pagination from './Pagination'
 import Loading from './Loading'
 import '../scss/ResultSearch.scss'
 import '../scss/ResultNews.scss'
+import '../scss/ResultImage.scss'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
@@ -47,12 +48,14 @@ const Result = () => {
 
                 {Array.isArray(image_results) ?
                     image_results.map(({ image, link }, index) => {
-                        return <div className='image-result-item' key={index}>
-                            <div><img src={image.src} alt="sai duong dan" /></div>
-                            <div>{link.href}</div>
+                        return <a className='image-result-item'
+                            href={link.href}
+                            key={index}>
+                            <img src={image.src} alt="sai duong dan" />
+                            <div className='image-result-link'>{link.href.substr(29, 30)}</div>
 
 
-                        </div>
+                        </a>
                     })
 
                     : ""}

@@ -121,6 +121,9 @@
     margin-left: #{var(--side-left)};
     & div {
         padding: 0px 10px;
+        @include mobile-maxwidth {
+            padding: 5px;
+        }
     }
     
 

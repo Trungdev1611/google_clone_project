@@ -1,11 +1,11 @@
 @import "Mixin.scss";
 
 .search-result {
-    margin: 3rem 0;
+    margin: 2.5rem 0;
     // color: red;
 }
 .search-result-item{
-    padding: 1.5rem 0;
+    padding: 1.3rem 0;
     font-size: 16px;
     width: 60%;
     margin-left: 18rem;
@@ -25,9 +25,13 @@
         font-size: 14px;
     }
     & .search-result__title {
-        font-size: 2.2rem;
         padding: 2px 0;
-        font-weight: 600;
+        font-weight: 400;
+        & a {
+            font-size: 1.8rem;
+        padding: 2px 0;
+
+        }
 
     }
     & .search-result__desc {

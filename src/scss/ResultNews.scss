@@ -1,0 +1,39 @@
+@import "Mixin.scss";
+.news-result {
+    margin: 2.5rem 0;
+    & .news-result-item {
+        padding: 1.3rem;
+        font-size: 16px;
+        width: 65%;
+        margin-left: 18rem;
+        padding-left: 15px;
+        border: 1px solid #ccc;
+        margin-top: 2rem;
+        border-radius: 10px;
+        @include tablet-maxwidth {
+            margin-left: 15rem;
+            width: 75%;
+        }
+        @include mobile-maxwidth {
+            width: 90%;
+            margin-left: 2rem;
+    
+        }
+        & .news-result-item__title {
+            & a {
+                font-size: 1.8rem;
+                color: #484534;
+        cursor: pointer;
+
+                &:hover{
+                    color: #1a0dab;
+                }
+            }
+            padding-bottom: 5px;
+        }
+        .news-result-item__desc {
+            font-size: 1.5rem;
+
+        }
+    }
+}

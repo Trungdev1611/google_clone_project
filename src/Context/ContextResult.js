@@ -2,25 +2,39 @@ import React from 'react'
 import { createContext } from 'react'
 import { useState, useEffect, useContext, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 export const ContextggSearch = createContext()
 
 const ContextResult = (props) => {
+    const navigate = useNavigate()
     let timeout = useRef()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [searchInput, setSearchInput] = useState("")
+    const [currentPage, setCurrentPage] = useState(1)
+    const [inputHome, setInputHome] = useState("")
+
     const url = "https://google-search3.p.rapidapi.com/api/v1"
 
     const location = useLocation() // info url
+    let amountOfdata = 100
+    function handleSearch() {
+        if (inputHome.trim())
+            setSearchInput(inputHome)
+        //chuyen huong trang nguoi dung su dung hooks usenavigate
+        navigate("/search"
+            // , { replace: true }
+        )
+        // replace true will not save info page history in browser so we can't back page history
 
+    }
     useEffect(() => {
         if (searchInput.trim()) setLoading(true) // neu input co value va duoc submit thi loading 
         function fetchData(content, keyword) {
-
             let linkAPi = `${url}${keyword}/q=${content}`
             console.log(linkAPi)
-            fetch(`${url}${keyword}/q=${content}`, {
+            fetch(`${url}${keyword}/q=${content}&&num=${amountOfdata}`, {
 
                 method: 'GET',
                 headers: {
@@ -40,28 +54,28 @@ const ContextResult = (props) => {
             // clear Timeout increase perfomance
             //void(0) la de so sanh undefined
             //timeout khoi tao tai useRef neu khac undefined thi cleare
-            if (timeout !== void (0)) clearTimeout(timeout)
+            if (timeout.current !== void (0)) clearTimeout(timeout.current)
 
         }
         if (["/search", "/image", "/video", "/news"].includes(location.pathname)) {
 
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
-                timeout = setTimeout(function () {
+                timeout.current = setTimeout(function () {
                     fetchData(searchInput, location.pathname)
-                    console.log('re-render 2s')
+                    console.log('re-render 200ms')
 
-                }, 2000)
+                }, 200)
             }
 
         }
 
 
 
-    }, [location.pathname, searchInput])
+    }, [location.pathname, searchInput, amountOfdata])
 
     return (
-        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput }}>
+        <ContextggSearch.Provider value={{ data, loading, searchInput, setSearchInput, currentPage, setCurrentPage, amountOfdata, inputHome, setInputHome, handleSearch }}>
             {props.children}
         </ContextggSearch.Provider>
     )

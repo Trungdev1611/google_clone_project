@@ -67,13 +67,13 @@ const ContextResult = (props) => {
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
                 timeout.current = setTimeout(function () {
-                    // fetchData(searchInput, location.pathname, url, {
-                    //     'X-User-Agent': 'desktop',
-                    //     'X-Proxy-Location': 'EU',
-                    //     'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
-                    //     'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
-                    // })
-                    // console.log('re-render 200ms')
+                    fetchData(searchInput, location.pathname, url, {
+                        'X-User-Agent': 'desktop',
+                        'X-Proxy-Location': 'EU',
+                        'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
+                        'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
+                    })
+                    console.log('re-render 200ms')
 
                 }, 200)
             }
@@ -81,10 +81,13 @@ const ContextResult = (props) => {
         }
 
         if (location.pathname === "/video") {
-            fetchData(searchInput, location.pathname, url2, {
-                'X-RapidAPI-Host': 'youtube-search-results.p.rapidapi.com',
-                'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
-            })
+            if (searchInput.trim()) {
+                fetchData(searchInput, location.pathname, url2, {
+                    'X-RapidAPI-Host': 'youtube-search-results.p.rapidapi.com',
+                    'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
+                })
+            }
+
 
         }
 

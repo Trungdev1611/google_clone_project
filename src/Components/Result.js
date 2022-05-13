@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useResultContext } from '../Context/ContextResult'
 import { useLocation } from 'react-router-dom'
 import Pagination from './Pagination'
@@ -6,22 +6,16 @@ import Loading from './Loading'
 import '../scss/ResultSearch.scss'
 import '../scss/ResultNews.scss'
 import '../scss/ResultImage.scss'
+import '../scss/styleResultvideo.scss'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
-    let refvideo = useRef()
 
     //pagination start
     let { currentPage } = useResultContext()
     let quatityDataainpages = 10  // quatity data in one pagination
     let indexOfLastPage = currentPage * quatityDataainpages  //so luong phan tu cuoi cung trong page vd Page4 = 20
     let indexOfFirstPage = (currentPage - 1) * quatityDataainpages //Vd Page4 = 15
-
-    //pagination end
-    //handle play video
-    function handlePlayVideo() {
-
-    }
 
 
 
@@ -88,14 +82,18 @@ const Result = () => {
 
             let { items: result1 } = data.data
             console.log(result1)
-            return <div>
-                {Array.isArray(result1) ? result1.map(({ thumbnails, title, url, author, uploadedAt }, index) => {
-                    return <div className='video-result' key={index}>
-                        <div className="video-result__connect">
-                            <div className="connect-video__link">{url}</div>
-                            <div className="connect-video-title">{title}</div>
+            return <div className='video-result'>
+                {Array.isArray(result1) && result1.length > 0 ? result1.map(({ description, title = 'How to Get Away with Murder', url, author, uploadedAt, id = 'azq0S0DKS50' }, index) => {
+                    console.log(description)
+                    return <div className='video-result-item' key={index}>
+                        <a className="video-result__connect" href={url}>
+                            <div className="connect-video__link">{"www.youtube.com>watch"}</div>
+                            <div className="connect-video-title">{`${title.substr(0, 30)} - YouTube`}</div>
+                        </a>
+                        <div className="video-result__desc">
+                            {description ? description : "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.."}
                         </div>
-                        <iframe src="https://youtube.com/embed/E00v8ebUNgs"
+                        <iframe src={`https://youtube.com/embed/${id}`}
                             sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
                             title={index}
                         ></iframe>

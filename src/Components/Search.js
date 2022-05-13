@@ -16,13 +16,15 @@ const Search = () => {
     function handleScroll() {
         let scroll = window.pageYOffset
 
-        if (scroll > 150) {
+        if (scroll > 120) {
             document.querySelector(".search-header").style.position = "fixed"
             document.querySelector(".search-header").style.boxShadow = " 0 1px 6px 0 rgba(32,33, 36,  0.28)"
+            document.querySelector(".router-link").style.paddingTop = "50px"
         }
         else {
             document.querySelector(".search-header").style.position = "static"
             document.querySelector(".search-header").style.boxShadow = "none"
+            document.querySelector(".router-link").style.paddingTop = "0px"
         }
     }
     useEffect(() => {

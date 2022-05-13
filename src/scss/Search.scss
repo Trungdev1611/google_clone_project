@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    
+    padding-top: 2rem;
     width: 100%;
     top: 0px;
     background-color: white;
@@ -125,8 +125,8 @@
 .router-link {
     display: flex;
     justify-content: flex-start;
-    font-size: 1.6rem;
-    margin-top: 0px;
+    font-size: 1.5rem;
+    margin-top: 10px;
     margin-left: #{var(--side-left)};
     & div {
         padding: 0px 10px;

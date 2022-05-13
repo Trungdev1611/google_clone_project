@@ -7,15 +7,15 @@ import "../scss/Search.scss"
 const Search = () => {
     let router = [
         { to: "/search", value: "Tất cả" },
-        { to: "/news", value: "Tin tức" },
         { to: "/image", value: "Hình ảnh" },
+        { to: "/news", value: "Tin tức" },
         { to: "/video", value: "Video" },
         { to: "/add", value: "Thêm" }]
     let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
     console.log('searchinput', searchInput)
     function handleScroll() {
         let scroll = window.pageYOffset
-        console.log(scroll)
+
         if (scroll > 150) {
             document.querySelector(".search-header").style.position = "fixed"
             document.querySelector(".search-header").style.boxShadow = " 0 1px 6px 0 rgba(32,33, 36,  0.28)"

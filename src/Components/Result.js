@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useResultContext } from '../Context/ContextResult'
 import { useLocation } from 'react-router-dom'
 import Pagination from './Pagination'
@@ -9,6 +9,7 @@ import '../scss/ResultImage.scss'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
+    let refvideo = useRef()
 
     //pagination start
     let { currentPage } = useResultContext()
@@ -17,7 +18,10 @@ const Result = () => {
     let indexOfFirstPage = (currentPage - 1) * quatityDataainpages //Vd Page4 = 15
 
     //pagination end
+    //handle play video
+    function handlePlayVideo() {
 
+    }
 
 
 
@@ -81,23 +85,28 @@ const Result = () => {
             </div>
 
         case '/video':
-            let urlimg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3I0MdOvq8aSDcOwopdYs1yOlEVbzfcnhYqA&usqp=CAU"
-            let { results: result1 } = data.data
+
+            let { items: result1 } = data.data
             console.log(result1)
             return <div>
-                {Array.isArray(result1) ? result1.map(({ title, link, description }, index) => {
+                {Array.isArray(result1) ? result1.map(({ thumbnails, title, url, author, uploadedAt }, index) => {
                     return <div className='video-result' key={index}>
-                        <h3><a href={link}>{title}</a></h3>
-                        <div><img src={urlimg} alt="" /></div>
-                        <div className="video-description">
-                            {description}
+                        <div className="video-result__connect">
+                            <div className="connect-video__link">{url}</div>
+                            <div className="connect-video-title">{title}</div>
                         </div>
+                        <iframe src="https://youtube.com/embed/E00v8ebUNgs"
+                            sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
+                            title={index}
+                        ></iframe>
+
 
 
                     </div>
-                }) : ""}
+                }) : ""
+                }
 
-            </div>
+            </div >
         default:
             return "Error"
     }

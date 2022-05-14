@@ -86,17 +86,27 @@ const Result = () => {
                 {Array.isArray(result1) && result1.length > 0 ? result1.map(({ description, title = 'How to Get Away with Murder', url, author, uploadedAt, id = 'azq0S0DKS50' }, index) => {
                     console.log(description)
                     return <div className='video-result-item' key={index}>
+
                         <a className="video-result__connect" href={url}>
                             <div className="connect-video__link">{"www.youtube.com>watch"}</div>
                             <div className="connect-video-title">{`${title.substr(0, 30)} - YouTube`}</div>
                         </a>
                         <div className="video-result__desc">
-                            {description ? description : "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.."}
+                            <div className="video">
+                                <iframe src={`https://youtube.com/embed/${id}`}
+
+                                    sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
+                                    title={index}
+                                ></iframe>
+                            </div>
+                            <div className='desc'>
+                                <div className="desc-article">
+                                    {description ? description : "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout, Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae.."}
+                                </div>
+                                <p>{uploadedAt}</p>
+                            </div>
+
                         </div>
-                        <iframe src={`https://youtube.com/embed/${id}`}
-                            sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
-                            title={index}
-                        ></iframe>
 
 
 

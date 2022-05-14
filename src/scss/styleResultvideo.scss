@@ -1,8 +1,107 @@
+@import "Mixin.scss";
 .video-result {
-    display: grid;
+    // display: grid;
     margin: 2.5rem 0;
-    padding: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 10px;
+
     justify-items: center;
+    & .video-result-item {
+        color:#484534 ;
+        padding: 1.3rem 0;
+        font-size: 16px;
+        width: 70%;
+        margin-left: 18rem;
+        padding-left: 15px;
+        @include tablet-maxwidth {
+            margin-left: 15rem;
+            width: 75%;
+        }
+        @include mobile-maxwidth {
+            width: 100%;
+            margin-left: 0rem;
+    
+        }
+       & .video-result__connect {
+        color:#484534  ;
+           & .connect-video__link {
+                font-size: 1.3rem;
+           }
+           & .connect-video-title {
+            font-size: 1.8rem;
+            color: #1a0dab;
+            padding: 6px 0;
+            &:hover {
+                text-decoration: underline;
+            }
+        
+            
+           }
+
+       }
+       & .video-result__desc {
+           display: flex;
+       
+           & .video {
+               border-radius: 10px;
+         
+            flex-shrink: 0;
+
+
+
+            
+            @include tablet-maxwidth {
+               
+                // width: 50%;
+                // border: 1px solid red;
+            
+            }
+      
+          
+               & iframe {
+                border-radius: 10px;
+                vertical-align: middle;
+                 width: 267px;
+                height: 150px;
+
+         
+             
+                @include tablet-maxwidth {
+                    width: 200px;
+                    height: 112.5px;
+                  
+                
+                }
+                @include mobile-maxwidth {
+                    width: 150px;
+                    height: 85px;
+                  
+                
+                }
+             
+               }
+             
+           }
+           & .desc {
+               padding-left: 12px;
+               padding-top: 5px;
+               font-size: 1.4rem;
+            //    flex: 1;
+
+               @include tablet-maxwidth {
+               
+            }
+               & .desc-article {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* number of lines to show */
+                        line-clamp:3; 
+                -webkit-box-orient: vertical;
+               }
+               & p {
+                   margin-top: 1.5rem;
+               }
+           }
+           
+       }
+    }
 }

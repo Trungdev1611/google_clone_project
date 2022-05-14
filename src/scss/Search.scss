@@ -37,7 +37,7 @@
     & .search-header__logo {
         width: 9rem;
         height: auto;
-        margin-right: 5rem;
+        margin-right: 6rem;
         @include desktop-maxwidth {
             width: 8rem;
           }
@@ -58,6 +58,7 @@
         & input {
             width: #{var(--width-input)};
             padding: 12px;
+            padding-left: 2.3rem;
             border-radius: 30px;
             border: 1px solid transparent;
             // border: 1px solid blue;

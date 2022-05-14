@@ -62,7 +62,7 @@ const Result = () => {
             </div>
         case '/news':
             let { entries } = data.data
-
+            console.log('entries', entries)
             return <div className='news-result'>
                 {Array.isArray(entries) ?
                     entries.slice(indexOfFirstPage, indexOfLastPage).map(({ link, title }, index) => {

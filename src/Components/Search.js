@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useResultContext } from '../Context/ContextResult'
 import { GoSearch } from 'react-icons/go';
 
@@ -12,6 +12,7 @@ const Search = () => {
         { to: "/video", value: "Video" },
         { to: "/add", value: "Thêm" }]
     let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
+    let navigate = useNavigate()
     console.log('searchinput', searchInput)
     function handleScroll() {
         let scroll = window.pageYOffset
@@ -34,11 +35,14 @@ const Search = () => {
             window.removeEventListener('scroll', handleScroll)
         }
     })
-
+    function redirectHome() {
+        setInputHome('')
+        return navigate("/")
+    }
     return (
         <div className="test">
             <div className="search-header">
-                <div className='search-header__logo'>
+                <div className='search-header__logo' onClick={redirectHome}>
                     <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="logo google" />
                 </div>
                 <div className="search-header__input">

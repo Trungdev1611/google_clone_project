@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Result from './Result'
 import Home from './Home'
 import Search from './Search'
-
 const Routesrender = () => {
   return (
     <Routes>

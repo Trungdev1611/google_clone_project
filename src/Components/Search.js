@@ -11,6 +11,7 @@ const Search = () => {
         { to: "/news", value: "Tin tức" },
         { to: "/video", value: "Video" },
         { to: "/add", value: "Thêm" }]
+
     let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
     let navigate = useNavigate()
     console.log('searchinput', searchInput)

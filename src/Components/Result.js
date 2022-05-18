@@ -7,6 +7,7 @@ import '../scss/ResultSearch.scss'
 import '../scss/ResultNews.scss'
 import '../scss/ResultImage.scss'
 import '../scss/styleResultvideo.scss'
+import NotFound from './NotFound'
 const Result = () => {
     let data = useResultContext()
     const location = useLocation()
@@ -25,17 +26,22 @@ const Result = () => {
     switch (location.pathname) {
         case '/search':
             var { results } = data.data
+            console.log(results)
             return <div className='search-result'>
-                {Array.isArray(results) ? results.slice(indexOfFirstPage, indexOfLastPage).map(({ title, link, description }, index) => {
-                    return <div className='search-result-item' key={index}>
-                        <div className='search-result__link'>{link.substr(0, 50)}</div>
-                        <div className='search-result__title'><a href="{link}" className='search-result__link'>{title}</a></div>
-                        <div className='search-result__desc'>{description}</div>
 
-                    </div>
 
-                }) : ""}
-                {Array.isArray(results) ? <Pagination /> : ""}
+                {Array.isArray(results) ? (results.length) ?
+                    results.slice(indexOfFirstPage, indexOfLastPage).map(({ title, link, description }, index) => {
+                        return <div className='search-result-item' key={index}>
+                            <div className='search-result__link'>{link.substr(0, 50)}</div>
+                            <div className='search-result__title'><a href="{link}" className='search-result__link'>{title}</a></div>
+                            <div className='search-result__desc'>{description}</div>
+
+                        </div>
+
+                    }) : <NotFound />
+                    : ""}
+                {Array.isArray(results) && results.length ? <Pagination /> : ""}
             </div>
 
         case '/image':
@@ -44,7 +50,7 @@ const Result = () => {
             console.log(Array.isArray(image_results))
             return <div className='image-result'>
 
-                {Array.isArray(image_results) ?
+                {Array.isArray(image_results) ? image_results.length > 0 ?
                     image_results.map(({ image, link }, index) => {
                         return <a className='image-result-item'
                             href={link.href}
@@ -54,7 +60,7 @@ const Result = () => {
 
 
                         </a>
-                    })
+                    }) : <NotFound />
 
                     : ""}
 
@@ -64,7 +70,7 @@ const Result = () => {
             let { entries } = data.data
             console.log('entries', entries)
             return <div className='news-result'>
-                {Array.isArray(entries) ?
+                {Array.isArray(entries) ? entries.length > 0 ?
                     entries.slice(indexOfFirstPage, indexOfLastPage).map(({ link, title }, index) => {
                         return <div className='news-result-item' key={index}>
                             <div className='news-result-item__title'><a href={link}>{title}</a></div>
@@ -72,10 +78,10 @@ const Result = () => {
 
 
                         </div>
-                    })
+                    }) : <NotFound />
 
                     : ""}
-                {Array.isArray(entries) ? <Pagination /> : ""}
+                {Array.isArray(entries) && entries.length > 0 ? <Pagination /> : ""}
             </div>
 
         case '/video':

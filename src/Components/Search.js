@@ -12,9 +12,9 @@ const Search = () => {
         { to: "/video", value: "Video" },
         { to: "/add", value: "Thêm" }]
 
-    let { searchInput, inputHome, setInputHome, handleSearch } = useResultContext()
+    let { inputHome, setInputHome, handleSearch } = useResultContext()
     let navigate = useNavigate()
-    console.log('searchinput', searchInput)
+
     function handleScroll() {
         let scroll = window.pageYOffset
 

@@ -34,7 +34,7 @@ const ContextResult = (props) => {
     useEffect(() => {
         if (searchInput.trim()) setLoading(true) // neu input co value va duoc submit thi loading 
         function fetchData(content, keyword, url, header) {
-            console.log('keyword', keyword)
+
             let linkAPi
             if (keyword === '/video') {
                 linkAPi = `/?q=${content}` //link APi tuong ung voi url2
@@ -43,7 +43,7 @@ const ContextResult = (props) => {
                 linkAPi = `${keyword}/q=${content}`//link APi tuong ung voi url1
             }
 
-            console.log(linkAPi)
+
             fetch(`${url}${linkAPi}&&num=${amountOfdata}`, {
 
                 method: 'GET',
@@ -70,10 +70,11 @@ const ContextResult = (props) => {
                     fetchData(searchInput, location.pathname, url, {
                         'X-User-Agent': 'desktop',
                         'X-Proxy-Location': 'EU',
+                        // 'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
+                        // 'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
                         'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
-                        'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
+                        'X-RapidAPI-Key': 'af1033cbe9mshc1752db24bfd580p129b4djsn0ed0638df7af'
                     })
-                    console.log('re-render 200ms')
 
                 }, 200)
             }

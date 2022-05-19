@@ -26,7 +26,6 @@ const Result = () => {
     switch (location.pathname) {
         case '/search':
             var { results } = data.data
-            console.log(results)
             return <div className='search-result'>
 
 
@@ -46,8 +45,7 @@ const Result = () => {
 
         case '/image':
             let { image_results } = data.data
-            console.log('imageresult', image_results)
-            console.log(Array.isArray(image_results))
+
             return <div className='image-result'>
 
                 {Array.isArray(image_results) ? image_results.length > 0 ?
@@ -68,7 +66,7 @@ const Result = () => {
             </div>
         case '/news':
             let { entries } = data.data
-            console.log('entries', entries)
+
             return <div className='news-result'>
                 {Array.isArray(entries) ? entries.length > 0 ?
                     entries.slice(indexOfFirstPage, indexOfLastPage).map(({ link, title }, index) => {
@@ -87,10 +85,10 @@ const Result = () => {
         case '/video':
 
             let { items: result1 } = data.data
-            console.log(result1)
+
             return <div className='video-result'>
                 {Array.isArray(result1) && result1.length > 0 ? result1.map(({ description, title = 'How to Get Away with Murder', url, author, uploadedAt, id = 'azq0S0DKS50' }, index) => {
-                    console.log(description)
+
                     return <div className='video-result-item' key={index}>
 
                         <a className="video-result__connect" href={url}>

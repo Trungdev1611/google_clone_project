@@ -11,3 +11,6 @@ https://musical-malabi-fa96d3.netlify.app/
 
 https://rapidapi.com/marindelija/api/youtube-search-results/:              youtube API
 
+
+
+https://beamish-flan-454531.netlify.app/news  chot

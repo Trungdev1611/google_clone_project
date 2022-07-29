@@ -15,7 +15,6 @@
     }
     & .logo {
       margin-bottom: 30px;
-   
       & img {
         @include tablet-maxwidth {
           width: 80%;
@@ -107,7 +106,7 @@
     width: 100%;
     padding-left: 40px;
     @include tablet-maxwidth {
-  padding-left: 10px;
+  padding-left: 20px;
 
     }
   }

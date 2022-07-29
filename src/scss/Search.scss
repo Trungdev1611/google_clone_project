@@ -1,4 +1,5 @@
 @import 'Mixin';
+
 :root {
     --width-input: 55%;
     --width-button: 100px;
@@ -20,7 +21,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
+    padding-top: 2rem;
+    width: 100%;
+    top: 0px;
+    background-color: white;
+    // border: 1px solid red;
+    // box-shadow: 0 1px 6px 0 rgba(32,33, 36,  0.28);
+    z-index: 1;
     @include mobile-maxwidth {
         flex-direction: column;
         justify-content: center;
@@ -29,7 +37,7 @@
     & .search-header__logo {
         width: 9rem;
         height: auto;
-        margin-right: 5rem;
+        margin-right: 6rem;
         @include desktop-maxwidth {
             width: 8rem;
           }
@@ -46,9 +54,11 @@
         position: relative;
         flex: 1;
         width: 100%;
+
         & input {
             width: #{var(--width-input)};
             padding: 12px;
+            padding-left: 2.3rem;
             border-radius: 30px;
             border: 1px solid transparent;
             // border: 1px solid blue;
@@ -116,11 +126,14 @@
 .router-link {
     display: flex;
     justify-content: flex-start;
-    font-size: 1.6rem;
-
+    font-size: 1.5rem;
+    margin-top: 10px;
     margin-left: #{var(--side-left)};
     & div {
         padding: 0px 10px;
+        @include mobile-maxwidth {
+            padding: 5px;
+        }
     }
     
 

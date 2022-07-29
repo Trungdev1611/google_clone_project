@@ -16,9 +16,10 @@ const ContextResult = (props) => {
     const [inputHome, setInputHome] = useState("")
 
     const url = "https://google-search3.p.rapidapi.com/api/v1"
-
+    const url2 = 'https://youtube-search-results.p.rapidapi.com/youtube-search'
     const location = useLocation() // info url
     let amountOfdata = 100
+
     function handleSearch() {
         if (inputHome.trim())
             setSearchInput(inputHome)
@@ -28,21 +29,25 @@ const ContextResult = (props) => {
         )
         // replace true will not save info page history in browser so we can't back page history
 
+
     }
     useEffect(() => {
         if (searchInput.trim()) setLoading(true) // neu input co value va duoc submit thi loading 
-        function fetchData(content, keyword) {
-            let linkAPi = `${url}${keyword}/q=${content}`
-            console.log(linkAPi)
-            fetch(`${url}${keyword}/q=${content}&&num=${amountOfdata}`, {
+        function fetchData(content, keyword, url, header) {
+
+            let linkAPi
+            if (keyword === '/video') {
+                linkAPi = `/?q=${content}` //link APi tuong ung voi url2
+            }
+            else {
+                linkAPi = `${keyword}/q=${content}`//link APi tuong ung voi url1
+            }
+
+
+            fetch(`${url}${linkAPi}&&num=${amountOfdata}`, {
 
                 method: 'GET',
-                headers: {
-                    'X-User-Agent': 'desktop',
-                    'X-Proxy-Location': 'EU',
-                    'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
-                    'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
-                }
+                headers: header
             })
                 .then(res => res.json())
                 .then(data => {
@@ -57,19 +62,35 @@ const ContextResult = (props) => {
             if (timeout.current !== void (0)) clearTimeout(timeout.current)
 
         }
-        if (["/search", "/image", "/video", "/news"].includes(location.pathname)) {
+        if (["/search", "/image", "/news"].includes(location.pathname)) {
 
             if (searchInput.trim()) {  //if input not empty and button clicked
                 //get data from API more time
                 timeout.current = setTimeout(function () {
-                    fetchData(searchInput, location.pathname)
-                    console.log('re-render 200ms')
+                    fetchData(searchInput, location.pathname, url, {
+                        'X-User-Agent': 'desktop',
+                        'X-Proxy-Location': 'EU',
+                        // 'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
+                        // 'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
+                        'X-RapidAPI-Host': 'google-search3.p.rapidapi.com',
+                        'X-RapidAPI-Key': 'af1033cbe9mshc1752db24bfd580p129b4djsn0ed0638df7af'
+                    })
 
                 }, 200)
             }
 
         }
 
+        if (location.pathname === "/video") {
+            if (searchInput.trim()) {
+                fetchData(searchInput, location.pathname, url2, {
+                    'X-RapidAPI-Host': 'youtube-search-results.p.rapidapi.com',
+                    'X-RapidAPI-Key': '37c1b1f305msh19bd0033ac267efp10c560jsnb408ff672597'
+                })
+            }
+
+
+        }
 
 
     }, [location.pathname, searchInput, amountOfdata])
